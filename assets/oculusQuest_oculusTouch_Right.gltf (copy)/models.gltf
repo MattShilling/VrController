@@ -1,0 +1,509 @@
+{
+  "asset": {
+    "generator": "Oculus::FBX2glTF2.0",
+    "version": "2.0"
+  },
+  "buffers": [
+    {
+      "uri": "buffer.bin",
+      "byteLength": 357868,
+      "name": "buffer"
+    }
+  ],
+  "bufferViews": [
+    {
+      "name": "1002Take 001_Time_BufferView",
+      "buffer": 0,
+      "byteLength": 484,
+      "byteOffset": 0
+    },
+    {
+      "name": "0_right_monterey_controller_ply_Skin_IBM_BufferView",
+      "buffer": 0,
+      "byteLength": 448,
+      "byteOffset": 484
+    },
+    {
+      "target": 34963,
+      "name": "0_right_monterey_controller_ply_INDICES_BufferView",
+      "buffer": 0,
+      "byteLength": 15942,
+      "byteOffset": 932
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_POSITION_BufferView",
+      "buffer": 0,
+      "byteLength": 42624,
+      "byteOffset": 16876
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_NORMAL_BufferView",
+      "buffer": 0,
+      "byteLength": 42624,
+      "byteOffset": 59500
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_TANGENT_BufferView",
+      "buffer": 0,
+      "byteLength": 42624,
+      "byteOffset": 102124
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_BINORMAL_BufferView",
+      "buffer": 0,
+      "byteLength": 42624,
+      "byteOffset": 144748
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_TEXCOORD_0_BufferView",
+      "buffer": 0,
+      "byteLength": 28416,
+      "byteOffset": 187372
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_TEXCOORD_1_BufferView",
+      "buffer": 0,
+      "byteLength": 28416,
+      "byteOffset": 215788
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_JOINTS_0_BufferView",
+      "buffer": 0,
+      "byteLength": 56832,
+      "byteOffset": 244204
+    },
+    {
+      "target": 34962,
+      "name": "0_right_monterey_controller_ply_WEIGHTS_0_BufferView",
+      "buffer": 0,
+      "byteLength": 56832,
+      "byteOffset": 301036
+    }
+  ],
+  "accessors": [
+    {
+      "name": "1002Take 001_Time_Accessor",
+      "bufferView": 0,
+      "byteOffset": 0,
+      "byteStride": 4,
+      "componentType": 5126,
+      "count": 121,
+      "type": "SCALAR"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_Skin_IBM_Accessor",
+      "bufferView": 1,
+      "byteOffset": 0,
+      "byteStride": 64,
+      "componentType": 5126,
+      "count": 7,
+      "type": "MAT4"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_INDICES_Accessor",
+      "bufferView": 2,
+      "byteOffset": 0,
+      "byteStride": 2,
+      "componentType": 5123,
+      "count": 7971,
+      "type": "SCALAR"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_POSITION_Accessor",
+      "bufferView": 3,
+      "byteOffset": 0,
+      "byteStride": 12,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC3",
+      "min": [
+        -0.0452767610549926758,
+        -0.0248502511531114578,
+        -0.0531548336148262024
+      ],
+      "max": [
+        0.0452767610549926758,
+        0.0905567184090614319,
+        0.0723930373787879944
+      ]
+    },
+    {
+      "name": "0_right_monterey_controller_ply_NORMAL_Accessor",
+      "bufferView": 4,
+      "byteOffset": 0,
+      "byteStride": 12,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC3"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_TANGENT_Accessor",
+      "bufferView": 5,
+      "byteOffset": 0,
+      "byteStride": 12,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC3"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_BINORMAL_Accessor",
+      "bufferView": 6,
+      "byteOffset": 0,
+      "byteStride": 12,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC3"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_TEXCOORD_0_Accessor",
+      "bufferView": 7,
+      "byteOffset": 0,
+      "byteStride": 8,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC2"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_TEXCOORD_1_Accessor",
+      "bufferView": 8,
+      "byteOffset": 0,
+      "byteStride": 8,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC2"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_JOINTS_0_Accessor",
+      "bufferView": 9,
+      "byteOffset": 0,
+      "byteStride": 16,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC4"
+    },
+    {
+      "name": "0_right_monterey_controller_ply_WEIGHTS_0_Accessor",
+      "bufferView": 10,
+      "byteOffset": 0,
+      "byteStride": 16,
+      "componentType": 5126,
+      "count": 3552,
+      "type": "VEC4"
+    }
+  ],
+  "images": [
+    {
+      "name": "monterey_controller_lod_bc",
+      "uri": "monterey_controller_lod_bc.ktx"
+    },
+    {
+      "name": "monterey_controller_lod_nm",
+      "uri": "monterey_controller_lod_nm.ktx"
+    }
+  ],
+  "textures": [
+    {
+      "name": "monterey_controller_lod_bc",
+      "source": 0
+    },
+    {
+      "name": "monterey_controller_lod_nm",
+      "source": 1
+    }
+  ],
+  "materials": [
+    {
+      "name": "controllerMTL",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 0
+        }
+      },
+      "emissiveTexture": {
+        "index": 1
+      },
+      "alphaMode": "OPAQUE",
+      "extensions": {
+        "oculus_write_alpha": true
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "right_monterey_controller_ply",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 3,
+            "NORMAL": 4,
+            "TANGENT": 5,
+            "BINORMAL": 6,
+            "TEXCOORD_0": 7,
+            "TEXCOORD_1": 8,
+            "JOINTS_0": 9,
+            "WEIGHTS_0": 10
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "skins": [
+    {
+      "name": "0_right_monterey_controller_ply_Skin",
+      "joints": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "inverseBindMatrices": 1
+    }
+  ],
+  "animations": [
+    {
+      "name": "Take 001",
+      "channels": [
+      ],
+      "samplers": [
+      ]
+    }
+  ],
+  "cameras": [
+  ],
+  "nodes": [
+    {
+      "name": "RootNode",
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "children": [
+        1,
+        3
+      ]
+    },
+    {
+      "name": "geom",
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        -0.70710676908493042,
+        0,
+        0,
+        0.70710676908493042
+      ],
+      "scale": [
+        0.00999999977648258209,
+        0.00999999977648258209,
+        0.00999999977648258209
+      ],
+      "children": [
+        2
+      ]
+    },
+    {
+      "name": "right_monterey_controller_ply",
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "mesh": 0,
+      "skin": 0
+    },
+    {
+      "name": "right_monterey_controller_world",
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        -0.70710676908493042,
+        0,
+        0,
+        0.70710676908493042
+      ],
+      "scale": [
+        0.00999999977648258209,
+        0.00999999977648258209,
+        0.00999999977648258209
+      ],
+      "children": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "b_button_oculus",
+      "translation": [
+        1.73111639014678076e-05,
+        3.46790790557861328,
+        0.212717518210411072
+      ],
+      "rotation": [
+        0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b_trigger_front",
+      "translation": [
+        2.79438584666582337e-17,
+        -1.09858512878417969,
+        -0.926677405834197998
+      ],
+      "rotation": [
+        -6.12323426292583927e-17,
+        6.12323426292583927e-17,
+        1,
+        -6.12323426292583927e-17
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b_trigger_grip",
+      "translation": [
+        0.639140486717224121,
+        1.31589734554290771,
+        -1.41517138481140137
+      ],
+      "rotation": [
+        -0.469185084104537964,
+        -0.524908483028411865,
+        -0.473783880472183228,
+        0.529022932052612305
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b_thumbstick",
+      "translation": [
+        -0.85000002384185791,
+        0.153537720441818237,
+        -0.231328681111335754
+      ],
+      "rotation": [
+        -0.707100033760070801,
+        -0.00308532547205686569,
+        0.707100033760070801,
+        0.00308532547205686569
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b_button_a",
+      "translation": [
+        0.8008270263671875,
+        1.59376955032348633,
+        0.348854005336761475
+      ],
+      "rotation": [
+        0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "name": "b_button_b",
+      "translation": [
+        1.20457994937896729,
+        0.178073525428771973,
+        0.286231011152267456
+      ],
+      "rotation": [
+        0.5,
+        0.5,
+        -0.5,
+        0.5
+      ],
+      "scale": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ],
+      "name": "Root Scene",
+      "extensions": {
+        "oculus_tags": [
+        ]
+      }
+    }
+  ],
+  "scene": 0
+}
