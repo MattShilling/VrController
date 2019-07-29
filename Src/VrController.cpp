@@ -588,7 +588,7 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 
 		Locale = ovrLocale::Create( *java->Env, java->ActivityObject, "default" );
 
-		String fontName;
+		std::string fontName;
 		GetLocale().GetString( "@string/font_name", "efigs.fnt", fontName );
 		GuiSys->Init( this->app, *SoundEffectPlayer, fontName.c_str(), &app->GetDebugLines() );
 
