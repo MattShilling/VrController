@@ -12,8 +12,10 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #if !defined( OVR_ArmModel_h )
 #define OVR_ArmModel_h
 
-#include "Kernel/OVR_Types.h"
-#include "Kernel/OVR_LogUtils.h"
+#include <vector>
+
+#include "OVR_Types.h"
+#include "OVR_LogUtils.h"
 #include "VrApi_Types.h"
 #include "OVR_Skeleton.h"
 
@@ -37,13 +39,13 @@ public:
 	void				Update( const Posef & headPose, const Posef & remotePose, const ovrHandedness handedness, 
 								const bool recenteredController, Posef & outPose );
 
-	const ovrSkeleton &			GetSkeleton() const { return Skeleton; }
-	const Array< ovrJoint > &	GetTransformedJoints() const { return TransformedJoints; }
+	const ovrSkeleton &	GetSkeleton() const { return Skeleton; }
+	const std::vector< ovrJoint > &	GetTransformedJoints() const { return TransformedJoints; }
 
 private:
 	ovrSkeleton			Skeleton;
 	Posef				FootPose;
-	Array< ovrJoint >	TransformedJoints;
+	std::vector< ovrJoint >	TransformedJoints;
 
 	float				LastUnclampedRoll;
 	

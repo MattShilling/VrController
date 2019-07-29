@@ -20,8 +20,11 @@ android {
     // be unique on a system.  If you don't change it, a new app
     // will replace an older one.
     applicationId "com.oculus." + project.archivesBaseName
+    minSdkVersion 23
+    targetSdkVersion 25
+    compileSdkVersion 26
 
-    // override app plugin abiFilters for both 32 and 64-bit support
+    // override app plugin abiFilters for both 3s2 and 64-bit support
     externalNativeBuild {
         ndk {
                 abiFilters 'armeabi-v7a','arm64-v8a'

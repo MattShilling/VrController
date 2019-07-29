@@ -12,10 +12,10 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #if !defined( OVR_PARTICLESYSTEM_H )
 #define OVR_PARTICLESYSTEM_H
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_String.h"
-#include "Kernel/OVR_Array.h"
-#include "Kernel/OVR_TypesafeNumber.h"
+#include <vector>
+
+#include "OVR_Math.h"
+#include "OVR_TypesafeNumber.h"
 #include "OVR_Input.h"
 #include "SurfaceRender.h"
 #include "GlProgram.h"
@@ -28,6 +28,7 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #if defined( USE_STD_VECTOR )
 
 #include <vector>
+#include <string>
 
 #elif defined( USE_SIMPLE_ARRAY )
 
@@ -155,7 +156,7 @@ public:
 	void				Shutdown();
 
 	void				RenderEyeView( Matrix4f const & viewMatrix, Matrix4f const & projectionMatrix,
-								Array< ovrDrawSurface > & surfaceList ) const;
+								std::vector< ovrDrawSurface > & surfaceList ) const;
 
 	handle_t		 	AddParticle( const ovrFrameInput & frame, 
 								const Vector3f & initialPosition, const float initialOrientation, 

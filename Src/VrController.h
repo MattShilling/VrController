@@ -33,7 +33,7 @@ class ovrTextureAtlas;
 class ovrBeamRenderer;
 
 
-typedef Array< ovrPairT< ovrParticleSystem::handle_t, ovrBeamRenderer::handle_t > > jointHandles_t;
+typedef std::vector< ovrPairT< ovrParticleSystem::handle_t, ovrBeamRenderer::handle_t > > jointHandles_t;
 
 //==============================================================
 // ovrInputDeviceBase

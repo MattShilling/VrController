@@ -12,8 +12,10 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #if !defined( OVR_BeamRenderer_h )
 #define OVR_BeamRenderer_h
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_TypesafeNumber.h"
+#include <vector>
+
+#include "OVR_Math.h"
+#include "OVR_TypesafeNumber.h"
 #include "SurfaceRender.h"
 #include "GlProgram.h"
 #include "OVR_Input.h"
@@ -48,7 +50,7 @@ public:
 	void			SetPose( const Posef & pose );
 
 	void		    RenderEyeView( const Matrix4f & viewMatrix, const Matrix4f & projMatrix, 
-							Array< ovrDrawSurface > & surfaceList );
+							std::vector< ovrDrawSurface > & surfaceList );
 
 	// If lifeTime == LIFETIME_INFINITE, then the beam will never be automatically removed and
 	// it can be referenced by handle. The handle will be returned from this function.
@@ -115,9 +117,9 @@ private:
 
 	ovrSurfaceDef 			Surf;
 
-	Array< ovrBeamInfo > 	BeamInfos;
-	Array< handle_t >		ActiveBeams;
-	Array< handle_t >		FreeBeams;
+	std::vector< ovrBeamInfo > 	BeamInfos;
+	std::vector< handle_t >		ActiveBeams;
+	std::vector< handle_t >		FreeBeams;
 
 	int						MaxBeams;
 

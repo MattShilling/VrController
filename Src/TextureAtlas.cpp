@@ -10,6 +10,7 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 ************************************************************************************/
 
 #include "TextureAtlas.h"
+#include "OVR_Std.h"
 
 namespace OVR {
 
@@ -33,7 +34,7 @@ bool ovrTextureAtlas::BuildSpritesFromGrid( const int numSpriteColumns, const in
 	OVR_ASSERT( TextureWidth % numSpriteColumns == 0 );
 	OVR_ASSERT( TextureHeight % numSpriteRows == 0 );
 
-	Sprites.Resize( 0 );
+	Sprites.resize( 0 );
 
 	bool done = false;
 	for ( int y = 0; y < numSpriteRows; ++y )
@@ -52,7 +53,7 @@ bool ovrTextureAtlas::BuildSpritesFromGrid( const int numSpriteColumns, const in
 			Vector2f uvMaxs;
 			GetUVsForGridCell( x, y, numSpriteColumns, numSpriteRows, 
 						TextureWidth, TextureHeight, 8, 8, uvMins, uvMaxs );
-			Sprites.PushBack( ovrSpriteDef(	name, uvMins, uvMaxs ) );
+			Sprites.push_back( ovrSpriteDef(	name, uvMins, uvMaxs ) );
 		}
 		if ( done )
 		{
@@ -66,12 +67,12 @@ bool ovrTextureAtlas::BuildSpritesFromGrid( const int numSpriteColumns, const in
 // specify sprite locations as a custom list
 bool ovrTextureAtlas::Init( ovrFileSys & fileSys, const char * atlasTextureName )
 {
-	MemBufferT< uint8_t > buffer;
+	std::vector< uint8_t > buffer;
 	if ( fileSys.ReadFile( atlasTextureName, buffer ) )
 	{
 		GL_CheckErrors( "Pre atlas texture load" );
 
-		AtlasTexture = LoadTextureFromBuffer( atlasTextureName, MemBuffer( buffer, static_cast< int >( buffer.GetSize() ) ),
+		AtlasTexture = LoadTextureFromBuffer( atlasTextureName, buffer.data(), buffer.size(),
 									TextureFlags_t( TEXTUREFLAG_NO_DEFAULT ), TextureWidth, TextureHeight );
 		GL_CheckErrors( "Post atlas texture load" );
 		if ( AtlasTexture == 0 )
@@ -85,7 +86,7 @@ bool ovrTextureAtlas::Init( ovrFileSys & fileSys, const char * atlasTextureName 
 	return true;
 }
 
-bool ovrTextureAtlas::SetSpriteDefs( const Array< ovrSpriteDef > & sprites )
+bool ovrTextureAtlas::SetSpriteDefs( const std::vector< ovrSpriteDef > & sprites )
 {
 	Sprites = sprites;
 	return true;
@@ -103,9 +104,9 @@ void ovrTextureAtlas::Shutdown()
 
 const ovrTextureAtlas::ovrSpriteDef & ovrTextureAtlas::GetSpriteDef( const char * spriteName ) const
 {
-	for ( int i = 0; i < Sprites.GetSizeI(); ++i )
+	for ( int i = 0; i < static_cast< int >( Sprites.size() ); ++i )
 	{
-		if ( OVR_stricmp( Sprites[i].Name.ToCStr(), spriteName ) == 0 )
+		if ( OVR_stricmp( Sprites[i].Name.c_str(), spriteName ) == 0 )
 		{
 			return Sprites[i];
 		}

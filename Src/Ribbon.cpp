@@ -10,7 +10,8 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 ************************************************************************************/
 
 #include "Ribbon.h"
-#include "Kernel/OVR_LogUtils.h"
+#include "OVR_LogUtils.h"
+#include "OVR_Math.h"
 #include "GlTexture.h"
 #include "VrCommon.h"
 
@@ -73,14 +74,14 @@ ovrRibbon::ovrRibbon( const ovrPointList & pointList, const float width, const V
 	const int numVerts = maxQuads * 4;
 	
 	VertexAttribs attr;
-	attr.position.Resize( numVerts );
-	attr.color.Resize( numVerts );
-	attr.uv0.Resize( numVerts );
+	attr.position.resize( numVerts );
+	attr.color.resize( numVerts );
+	attr.uv0.resize( numVerts );
 
 	// the indices will never change
 	const int numIndices = maxQuads * 6;
-	Array< TriangleIndex> indices;
-	indices.Resize( numIndices );
+	std::vector< TriangleIndex> indices;
+	indices.resize( numIndices );
 	// so we can just set them up at initialization time
 	TriangleIndex v = 0;
 	for ( int i = 0; i < maxQuads; ++i )
@@ -174,9 +175,9 @@ void ovrRibbon::Update( const ovrPointList & pointList, const ovrMatrix4f & cent
 	VertexAttribs attr;
 	const int curPoints = pointList.GetCurPoints();
 	const int numVerts = ( curPoints - 1 ) * 4;
-	attr.position.Resize( numVerts );
-	attr.color.Resize( numVerts );
-	attr.uv0.Resize( numVerts );
+	attr.position.resize( numVerts );
+	attr.color.resize( numVerts );
+	attr.uv0.resize( numVerts );
 
 	//Vector3f eyePos( GetViewMatrixPosition( centerViewMatrix ) );
 	Vector3f eyeFwd( GetViewMatrixForward( centerViewMatrix ) );
@@ -197,11 +198,11 @@ void ovrRibbon::Update( const ovrPointList & pointList, const ovrMatrix4f & cent
 	{
 		if ( invertAlpha )
 		{
-			return 1.0f - Alg::Clamp( (float)( curEdge >> 1 ) / (float)( curPoints ), 0.0f, 1.0f );
+			return 1.0f - clamp<float>( (float)( curEdge >> 1 ) / (float)( curPoints ), 0.0f, 1.0f );
 		}
 		else
 		{
-			return Alg::Clamp( (float)curEdge / (float)( curPoints >> 1 ), 0.0f, 1.0f );
+			return clamp<float>( (float)curEdge / (float)( curPoints >> 1 ), 0.0f, 1.0f );
 		}
 	};
 
@@ -263,7 +264,7 @@ void ovrRibbon::Update( const ovrPointList & pointList, const ovrMatrix4f & cent
 	Surface.geo.indexCount = numQuads * 6;
 }
 
-void ovrRibbon::GenerateSurfaceList( Array< ovrDrawSurface > & surfaceList ) const
+void ovrRibbon::GenerateSurfaceList( std::vector< ovrDrawSurface > & surfaceList ) const
 {
 	if ( Surface.geo.indexCount == 0 )
 	{
@@ -274,7 +275,7 @@ void ovrRibbon::GenerateSurfaceList( Array< ovrDrawSurface > & surfaceList ) con
 	drawSurf.modelMatrix = Matrix4f::Identity();
 	drawSurf.surface = &Surface;
 
-	surfaceList.PushBack( drawSurf );
+	surfaceList.push_back( drawSurf );
 }
 
 } // namespace OVR

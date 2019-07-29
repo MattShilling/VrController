@@ -12,8 +12,10 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #if !defined( OVR_TextureAtlas_h )
 #define OVR_TextureAtlas_h
 
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
+#include <vector>
+#include <string>
+
+#include "OVR_Math.h"
 #include "SurfaceRender.h"
 #include "GlTexture.h"
 #include "OVR_FileSys.h"
@@ -49,7 +51,7 @@ public:
 		{
 		}
 		
-		String		Name;	// name of the sprite texture
+		std::string		Name;	// name of the sprite texture
 		Vector2f	uvMins;	// bounds in texture space
 		Vector2f	uvMaxs;
 	};
@@ -60,7 +62,7 @@ public:
 	// Specify the texture to load for this atlas.
 	bool	Init( ovrFileSys & fileSys, const char * atlasTextureName );
 
-	bool	SetSpriteDefs( const Array< ovrSpriteDef > & sprites );
+	bool	SetSpriteDefs( const std::vector< ovrSpriteDef > & sprites );
 	void	SetSpriteName( const int index, const char * name );
 
 	void	Shutdown();
@@ -72,11 +74,11 @@ public:
 	// avoid sub-pixel UV boundaries.
 	bool	BuildSpritesFromGrid( const int numSpriteColumns, const int numSpriteRows, const int numSprites );
 
-	int						GetNumSprites() const { return Sprites.GetSizeI(); }
+	int						GetNumSprites() const { return static_cast< int >( Sprites.size() ); }
 	const GlTexture &		GetTexture() const { return AtlasTexture; }
 	const ovrSpriteDef &	GetSpriteDef( const int index ) const { return Sprites[index]; }
 	const ovrSpriteDef &	GetSpriteDef( const char * spriteName ) const;
-	const String &			GetTextureName() const { return TextureName; }
+	const std::string &		GetTextureName() const { return TextureName; }
 	int						GetTextureWidth() const { return TextureWidth; }
 	int						GetTextureHeight() const { return TextureHeight; }
 
@@ -87,11 +89,11 @@ public:
 									Vector2f & uvMins, Vector2f & uvMaxs );
 
 private:
-	Array< ovrSpriteDef >	Sprites;
+	std::vector< ovrSpriteDef >	Sprites;
 	GlTexture				AtlasTexture;
 	int						TextureWidth;
 	int						TextureHeight;
-	String					TextureName;
+	std::string				TextureName;
 };
 
 } // namespace OVR

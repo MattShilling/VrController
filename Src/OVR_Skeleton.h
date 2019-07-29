@@ -11,9 +11,10 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #ifndef OVR_Skeleton_h
 #define OVR_Skeleton_h
 
+#include <vector>
+
 #include "VrApi_Types.h"
-#include "Kernel/OVR_Math.h"
-#include "Kernel/OVR_Array.h"
+#include "OVR_Math.h"
 
 namespace OVR {
 
@@ -97,20 +98,20 @@ public:
 
 	int							GetParentIndex( int const idx ) const;
 
-	Array< ovrJoint > &			GetJoints() { return Joints;  }
-	const Array< ovrJoint > &	GetJoints() const { return Joints;  }
+	std::vector< ovrJoint > &		GetJoints() { return Joints;  }
+	const std::vector< ovrJoint > &	GetJoints() const { return Joints;  }
 
 	static void					Transform( const Posef & transformPose, const Posef & inPose, Posef & outPose );
 
 	static void					TransformByParent( const Posef & parentPose, const int jointIndex, const Posef & inPose, 
-										const Array< ovrJointMod > & jointMods, Posef & outPose );
-	static void					Transform( const Posef & worldPose, const Array< ovrJoint > & inJoints, 
-										const Array< ovrJointMod > & jointMods, Array< ovrJoint > & outJoints );
+										const std::vector< ovrJointMod > & jointMods, Posef & outPose );
+	static void					Transform( const Posef & worldPose, const std::vector< ovrJoint > & inJoints, 
+										const std::vector< ovrJointMod > & jointMods, std::vector< ovrJoint > & outJoints );
 
-	static void					ApplyJointMods( const Array< ovrJointMod > & jointMods, Array< ovrJoint > & joints );
+	static void					ApplyJointMods( const std::vector< ovrJointMod > & jointMods, std::vector< ovrJoint > & joints );
 
 private:
-	Array< ovrJoint >			Joints;
+	std::vector< ovrJoint >			Joints;
 };
 
 void InitArmSkeleton( ovrSkeleton & skel );

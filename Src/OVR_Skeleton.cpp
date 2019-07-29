@@ -10,6 +10,7 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 ************************************************************************************/
 
 #include "OVR_Skeleton.h"
+#include "OVR_Types.h"
 
 namespace OVR {
 
@@ -17,15 +18,15 @@ ovrSkeleton::ovrSkeleton()
 {
 }
 
-const ovrJoint & ovrSkeleton::GetJoint( int const idx ) const 
-{ 
-	OVR_ASSERT( idx >= 0 && idx < Joints.GetSizeI() );
-	return Joints[idx]; 
+const ovrJoint & ovrSkeleton::GetJoint( int const idx ) const
+{
+	OVR_ASSERT( idx >= 0 && idx < static_cast< int >( Joints.size() ) );
+	return Joints[idx];
 }
 
 int ovrSkeleton::GetParentIndex( int const idx ) const
 {
-	if ( idx < 0 || idx >= Joints.GetSizeI() )
+	if ( idx < 0 || idx >= static_cast< int >( Joints.size() ) )
 	{
 		return -1;
 	}
@@ -38,13 +39,13 @@ void ovrSkeleton::Transform( const Posef & transformPose, const Posef & inPose, 
 	outPose.Rotation = transformPose.Rotation * inPose.Rotation;
 }
 
-void ovrSkeleton::TransformByParent( const Posef & parentPose, const int jointIndex, const Posef & inPose, 
-		const Array< ovrJointMod > & jointMods, Posef & outPose )
+void ovrSkeleton::TransformByParent( const Posef & parentPose, const int jointIndex, const Posef & inPose,
+		const std::vector< ovrJointMod > & jointMods, Posef & outPose )
 {
 	OVR_ASSERT( &inPose != &outPose );
 
 	bool appliedJointMod = false;
-	for ( int i = 0; i < jointMods.GetSizeI(); ++i )
+	for ( int i = 0; i < static_cast< int >( jointMods.size() ); ++i )
 	{
 		const ovrJointMod & mod = jointMods[i];
 		if ( mod.Type == ovrJointMod::MOD_LOCAL && mod.JointIndex == jointIndex )
@@ -63,7 +64,7 @@ void ovrSkeleton::TransformByParent( const Posef & parentPose, const int jointIn
 		Transform( parentPose, inPose, outPose );
 	}
 
-	for ( int i = 0; i < jointMods.GetSizeI(); ++i )
+	for ( int i = 0; i < static_cast< int >( jointMods.size() ); ++i )
 	{
 		const ovrJointMod & mod = jointMods[i];
 		if ( mod.Type == ovrJointMod::MOD_WORLD && mod.JointIndex == jointIndex )
@@ -73,18 +74,18 @@ void ovrSkeleton::TransformByParent( const Posef & parentPose, const int jointIn
 	}
 }
 
-void ovrSkeleton::Transform( const Posef & worldPose, const Array< ovrJoint > & inJoints, const Array< ovrJointMod > & jointMods,
-		Array< ovrJoint > & outJoints )
+void ovrSkeleton::Transform( const Posef & worldPose, const std::vector< ovrJoint > & inJoints, const std::vector< ovrJointMod > & jointMods,
+		std::vector< ovrJoint > & outJoints )
 {
-	if ( outJoints.GetSizeI() != inJoints.GetSizeI() )
+	if ( outJoints.size() != inJoints.size() )
 	{
-		OVR_ASSERT( outJoints.GetSizeI() == inJoints.GetSizeI() );
+		OVR_ASSERT( outJoints.size() == inJoints.size() );
 		return;
 	}
 
 	TransformByParent( worldPose, 0, inJoints[0].Pose, jointMods, outJoints[0].Pose );
 
-	for ( int i = 1; i < inJoints.GetSizeI(); ++i )
+	for ( int i = 1; i < static_cast< int >( inJoints.size() ); ++i )
 	{
 		const ovrJoint & inJoint = inJoints[i];
 		const ovrJoint & parentJoint = outJoints[inJoint.ParentIndex];
@@ -93,9 +94,9 @@ void ovrSkeleton::Transform( const Posef & worldPose, const Array< ovrJoint > & 
 	}
 }
 
-void ovrSkeleton::ApplyJointMods( const Array< ovrJointMod > & jointMods, Array< ovrJoint > & joints )
+void ovrSkeleton::ApplyJointMods( const std::vector< ovrJointMod > & jointMods, std::vector< ovrJoint > & joints )
 {
-	for ( int i = 0; i < jointMods.GetSizeI(); ++i )
+	for ( int i = 0; i < static_cast< int >( jointMods.size() ); ++i )
 	{
 		const ovrJointMod & mod = jointMods[i];
 		if ( mod.Type == ovrJointMod::MOD_WORLD )

@@ -13,7 +13,7 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #define OVR_BEAMRENDERER_H
 
 #include <cstdint>
-#include "Kernel/OVR_Math.h"
+#include "OVR_Math.h"
 
 namespace OVR {
 

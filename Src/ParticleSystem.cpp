@@ -12,7 +12,7 @@ Copyright   :   Copyright (c) Facebook Technologies, LLC and its affiliates. All
 #include "ParticleSystem.h"
 
 #include "TextureAtlas.h"
-#include "Kernel/OVR_LogUtils.h"
+#include "OVR_LogUtils.h"
 #include "VrCommon.h"
 
 //#define OVR_USE_PERF_TIMER
@@ -86,7 +86,7 @@ void ovrParticleSystem::Init( const int maxParticles, const ovrTextureAtlas & at
 	CreateGeometry( maxParticles );
 
 	Program = BuildProgram( particleVertexSrc, particleFragmentSrc );
-	SurfaceDef.surfaceName = String( "particles_" ) + atlas.GetTextureName();
+	SurfaceDef.surfaceName = std::string( "particles_" ) + atlas.GetTextureName();
 	SurfaceDef.graphicsCommand.Program = Program;
 	SurfaceDef.graphicsCommand.numUniformTextures = 1;
 	SurfaceDef.graphicsCommand.uniformTextures[0] = atlas.GetTexture();
@@ -317,7 +317,7 @@ void ovrParticleSystem::Shutdown()
 
 void ovrParticleSystem::RenderEyeView( Matrix4f const & viewMatrix,
 		Matrix4f const & projectionMatrix,
-		Array< ovrDrawSurface > & surfaceList ) const
+		std::vector< ovrDrawSurface > & surfaceList ) const
 {
 	OVR_UNUSED( viewMatrix );
 	OVR_UNUSED( projectionMatrix );
@@ -326,7 +326,7 @@ void ovrParticleSystem::RenderEyeView( Matrix4f const & viewMatrix,
 	ovrDrawSurface surf;
 	surf.modelMatrix = ModelMatrix;
 	surf.surface = &SurfaceDef;
-	surfaceList.PushBack( surf );
+	surfaceList.push_back( surf );
 }
 
 ovrParticleSystem::handle_t ovrParticleSystem::AddParticle( const ovrFrameInput & frame,
@@ -417,14 +417,14 @@ void ovrParticleSystem::CreateGeometry( const int maxParticles )
 	VertexAttribs attr;
 	const int numVerts = maxParticles * 4;
 
-	attr.position.Resize( numVerts );
-	attr.normal.Resize( numVerts );
-	attr.color.Resize( numVerts );
-	attr.uv0.Resize( numVerts );
+	attr.position.resize( numVerts );
+	attr.normal.resize( numVerts );
+	attr.color.resize( numVerts );
+	attr.uv0.resize( numVerts );
 
-	Array< TriangleIndex > indices;
+	std::vector< TriangleIndex > indices;
 	const int numIndices = maxParticles * 6;
-	indices.Resize( numIndices );
+	indices.resize( numIndices );
 
 	for ( int i = 0; i < maxParticles; ++i )
 	{

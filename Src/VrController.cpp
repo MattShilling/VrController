@@ -590,7 +590,7 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 
 		String fontName;
 		GetLocale().GetString( "@string/font_name", "efigs.fnt", fontName );
-		GuiSys->Init( this->app, *SoundEffectPlayer, fontName.ToCStr(), &app->GetDebugLines() );
+		GuiSys->Init( this->app, *SoundEffectPlayer, fontName.c_str(), &app->GetDebugLines() );
 
 		static ovrProgramParm LitUniformParms[] =
 		{
@@ -641,7 +641,98 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 
 		{
 			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/box.glb";
+			const char * controllerModelFile = "apk:///assets/gearcontroller.ovrscene";
+			programs.ProgSingleTexture = &ProgLitSpecularWithHighlight;
+			programs.ProgBaseColorPBR = &ProgLitSpecularWithHighlight;
+			programs.ProgLightMapped = &ProgLitSpecularWithHighlight;
+			MaterialParms	materials;
+			ControllerModelGear = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
+
+			if ( ControllerModelGear == NULL || static_cast< int >( ControllerModelGear->Models.size() ) < 1 )
+			{
+				OVR_FAIL( "Couldn't load Gear VR controller model" );
+			}
+
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[0].Data = &ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[0];
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[1].Data = &SpecularLightDirection;
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[2].Data = &SpecularLightColor;
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[3].Data = &AmbientLightColor;
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[4].Data = &ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[1];
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[5].Data = &HighLightMask;
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[6].Data = &HighLightColor;
+
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE;
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
+			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
+		}
+
+		{
+			ModelGlPrograms	programs;
+			const char * controllerModelFile = "apk:///assets/gearcontroller_prelit.ovrscene";
+			programs.ProgSingleTexture = &ProgSingleTexture;
+			programs.ProgBaseColorPBR = &ProgSingleTexture;
+			MaterialParms	materials;
+			ControllerModelGearPreLit = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
+
+			if ( ControllerModelGearPreLit == NULL || static_cast< int >( ControllerModelGearPreLit->Models.size() ) < 1 )
+			{
+				OVR_FAIL( "Couldn't load prelit Gear VR controller model" );
+			}
+
+			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.depthEnable = ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.depthMaskEnable = false;
+			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE_SEPARATE;
+			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
+			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
+		}
+
+		{
+			ModelGlPrograms	programs;
+			const char * controllerModelFile = "apk:///assets/oculusgo_controller.ovrscene";
+			programs.ProgSingleTexture = &ProgLitSpecularWithHighlight;
+			programs.ProgBaseColorPBR = &ProgLitSpecularWithHighlight;
+			programs.ProgLightMapped = &ProgLitSpecularWithHighlight;
+			MaterialParms	materials;
+			ControllerModelOculusGo = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
+
+			if ( ControllerModelOculusGo == NULL || static_cast< int >( ControllerModelOculusGo->Models.size() ) < 1 )
+			{
+				OVR_FAIL( "Couldn't load oculus go controller model" );
+			}
+
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[0].Data = &ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[0];
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[1].Data = &SpecularLightDirection;
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[2].Data = &SpecularLightColor;
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[3].Data = &AmbientLightColor;
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[4].Data = &ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[1];
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[5].Data = &HighLightMask;
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[6].Data = &HighLightColor;
+
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE;
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
+			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
+		}
+
+		{
+			ModelGlPrograms	programs;
+			const char * controllerModelFile = "apk:///assets/oculusgo_controller_prelit.ovrscene";
+			programs.ProgSingleTexture = &ProgSingleTexture;
+			programs.ProgBaseColorPBR = &ProgSingleTexture;
+			MaterialParms	materials;
+			ControllerModelOculusGoPreLit = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
+
+			if ( ControllerModelOculusGoPreLit == NULL || static_cast< int >( ControllerModelOculusGoPreLit->Models.size() ) < 1 )
+			{
+				OVR_FAIL( "Couldn't load prelit oculus go controller model" );
+			}
+
+			ControllerModelOculusGoPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE;
+			ControllerModelOculusGoPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
+			ControllerModelOculusGoPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
+		}
+
+		{
+			ModelGlPrograms	programs;
+			const char * controllerModelFile = "apk:///assets/oculusQuest_oculusTouch_Left.gltf.ovrscene";
 			programs.ProgSingleTexture = &ProgOculusTouch;
 			programs.ProgBaseColorPBR = &ProgOculusTouch;
 			programs.ProgSkinnedBaseColorPBR = &ProgOculusTouch;
@@ -651,7 +742,7 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 			MaterialParms	materials;
 			ControllerModelOculusTouchLeft = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
 
-			if ( ControllerModelOculusTouchLeft == NULL || ControllerModelOculusTouchLeft->Models.GetSizeI() < 1 )
+			if ( ControllerModelOculusTouchLeft == NULL || static_cast< int >( ControllerModelOculusTouchLeft->Models.size() ) < 1 )
 			{
 				OVR_FAIL( "Couldn't load Oculus Touch for Oculus Quest Controller left model" );
 			}
@@ -667,7 +758,7 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 		}
 		{
 			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/box.glb";
+			const char * controllerModelFile = "apk:///assets/oculusQuest_oculusTouch_Right.gltf.ovrscene";
 			programs.ProgSingleTexture = &ProgOculusTouch;
 			programs.ProgBaseColorPBR = &ProgOculusTouch;
 			programs.ProgSkinnedBaseColorPBR = &ProgOculusTouch;
@@ -677,7 +768,7 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 			MaterialParms	materials;
 			ControllerModelOculusTouchRight = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
 
-			if ( ControllerModelOculusTouchRight == NULL || ControllerModelOculusTouchRight->Models.GetSizeI() < 1 )
+			if ( ControllerModelOculusTouchRight == NULL || static_cast< int >( ControllerModelOculusTouchRight->Models.size() ) < 1 )
 			{
 				OVR_FAIL( "Couldn't load Oculus Touch for Oculus Quest Controller Controller right model" );
 			}
@@ -808,10 +899,10 @@ bool ovrVrController::OnKeyEvent( const int keyCode, const int repeatCount, cons
 
 static void RenderBones( const ovrFrameInput & frame, ovrParticleSystem * ps, ovrTextureAtlas & particleAtlas,
 		const uint16_t particleAtlasIndex, ovrBeamRenderer * br, ovrTextureAtlas & beamAtlas, const uint16_t beamAtlasIndex,
-		const Posef & worldPose, const Array< ovrJoint > & joints,
-		Array< ovrPairT< ovrParticleSystem::handle_t, ovrBeamRenderer::handle_t > > & handles )
+		const Posef & worldPose, const std::vector< ovrJoint > & joints,
+		std::vector< ovrPairT< ovrParticleSystem::handle_t, ovrBeamRenderer::handle_t > > & handles )
 {
-	for ( int i = 0; i < joints.GetSizeI(); ++i )
+	for ( int i = 0; i < static_cast< int >( joints.size() ); ++i )
 	{
 		const ovrJoint & joint = joints[i];
 		const Posef jw = worldPose * joint.Pose;
@@ -847,7 +938,7 @@ static void RenderBones( const ovrFrameInput & frame, ovrParticleSystem * ps, ov
 
 static void ResetBones( ovrParticleSystem * ps, ovrBeamRenderer * br, jointHandles_t & handles )
 {
-    for ( int i = 0; i < handles.GetSizeI(); ++i )
+    for ( int i = 0; i < static_cast< int >( handles.size() ); ++i )
     {
         if ( handles[i].First.IsValid() )
         {
@@ -954,7 +1045,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 
 				const ovrInputHeadsetCapabilities* headsetCapabilities = reinterpret_cast<const ovrInputHeadsetCapabilities*>( hsDevice.GetCaps() );
 
-				String buttonStr = "";
+				std::string buttonStr = "";
 				if ( headsetCapabilities->ButtonCapabilities & ovrButton_A )
 				{
 					buttonStr += "TRIGGER ";
@@ -984,7 +1075,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 
 				SetObjectVisible( *GuiSys, Menu, "secondary_input_button_caps", true );
 				SetObjectText( *GuiSys, Menu, "secondary_input_button_caps", "Buttons: %s",
-					buttonStr.ToCStr() );
+					buttonStr.c_str() );
 
 				float yaw;
 				float pitch;
@@ -1005,7 +1096,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 				}
 				else
 				{
-					String buttons;
+					std::string buttons;
 					if ( headsetInputState.Buttons & ovrButton_Back )
 					{
 						buttons += " BACK";
@@ -1041,7 +1132,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 					}
 		/*
 					OVR_LOG_WITH_TAG( "Buttons", "%s, trackpad = %s",
-							buttons.ToCStr(), headsetInputState.TrackpadStatus ? "down" : "up" );
+							buttons.c_str(), headsetInputState.TrackpadStatus ? "down" : "up" );
 					OVR_LOG_WITH_TAG( "Trackpad", "headset ( %.2f, %.2f ), mm( %.2f, %.2f ), minmax( %.2f, %.2f, %.2f, %.2f )",
 							headsetInputState.TrackpadPosition.x, headsetInputState.TrackpadPosition.y,
 							mm.x, mm.y, minTrackpad.x, minTrackpad.y, maxTrackpad.x, maxTrackpad.y );
@@ -1136,7 +1227,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 					SetObjectText( *GuiSys, Menu, "tertiary_input_l2", "L2 %.2f", gamepadInputState.LeftTrigger );
 					SetObjectText( *GuiSys, Menu, "tertiary_input_r2", "R2 %.2f", gamepadInputState.RightTrigger );
 
-					String dpadStr = "DPAD ";
+					std::string dpadStr = "DPAD ";
 					bool dpadset = false;
 					if ( gamepadInputState.Buttons & ovrButton_Up )
 					{
@@ -1158,7 +1249,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 						dpadset = true;
 						dpadStr += " RIGHT";
 					}
-					SetObjectText( *GuiSys, Menu, "tertiary_input_dpad", "%s", dpadStr.ToCStr() );
+					SetObjectText( *GuiSys, Menu, "tertiary_input_dpad", "%s", dpadStr.c_str() );
 					if( dpadset )
 					{
 						SetObjectColor( *GuiSys, Menu, "tertiary_input_dpad",
@@ -1284,7 +1375,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 			ovrArmModel & 			armModel = trDevice.GetArmModel();
 			const ovrTracking &		tracking = trDevice.GetTracking();
 
-			Array< ovrJoint > worldJoints = armModel.GetSkeleton().GetJoints();
+			std::vector< ovrJoint > worldJoints = armModel.GetSkeleton().GetJoints();
 
 			Posef remotePoseWithoutPosition( tracking.HeadPose.Pose );
 			remotePoseWithoutPosition.Translation = Vector3f( 0.0f, 0.0f, 0.0f );
@@ -1484,7 +1575,7 @@ ovrFrameResult ovrVrController::Frame( const ovrFrameInput & vrFrame )
 		{
 			if ( surface.surface != nullptr )
 			{
-				res.Surfaces.PushBack( surface );
+				res.Surfaces.push_back( surface );
 			}
 		}
 		
@@ -1614,24 +1705,24 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 		return result;
 	}
 
-	String headerObjectName;
-	String triggerObjectName;
-	String triggerAnalogObjectName;
-	String gripObjectName;
-	String gripAnalogObjectName;
-	String touchpadClickObjectName;
-	String touchObjectName;
-	String touchPosObjectName;
-	String backObjectName;
-	String rangeObjectName;
-	String sizeObjectName;
-	String buttonCapsObjectName;
-	String handObjectName;
-	String batteryObjectName;
-	String pointingObjectName;
-	String thumbUpObjectName;
-	String aButtonObjectName;
-	String bButtonObjectName;
+	std::string headerObjectName;
+	std::string triggerObjectName;
+	std::string triggerAnalogObjectName;
+	std::string gripObjectName;
+	std::string gripAnalogObjectName;
+	std::string touchpadClickObjectName;
+	std::string touchObjectName;
+	std::string touchPosObjectName;
+	std::string backObjectName;
+	std::string rangeObjectName;
+	std::string sizeObjectName;
+	std::string buttonCapsObjectName;
+	std::string handObjectName;
+	std::string batteryObjectName;
+	std::string pointingObjectName;
+	std::string thumbUpObjectName;
+	std::string aButtonObjectName;
+	std::string bButtonObjectName;
 
 	if ( controllerHand == dominantHand )
 	{
@@ -1676,7 +1767,7 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 		bButtonObjectName = "secondary_input_b";
 	}
 
-	String buttons;
+	std::string buttons;
 	char temp[128];
 	OVR_sprintf( temp, sizeof( temp ), "( %.2f, %.2f ) ",
 		remoteInputState.TrackpadPosition.x,
@@ -1685,12 +1776,12 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 
 	if ( trDevice.IsActiveInputDevice )
 	{
-		SetObjectColor( *GuiSys, Menu, headerObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, headerObjectName.c_str(),
 						Vector4f( 0.25f, 0.75f, 0.25f, 1.0f ) );
 	}
 	else
 	{
-		SetObjectColor( *GuiSys, Menu, headerObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, headerObjectName.c_str(),
 						Vector4f( 0.25f, 0.25f, 0.75f, 1.0f ) );
 	}
 
@@ -1699,57 +1790,57 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 #if defined( OVR_OS_ANDROID )
 	if ( ( inputTrackedRemoteCapabilities->ControllerCapabilities & ovrControllerCaps_ModelGearVR ) != 0 )
 	{
-		SetObjectText( *GuiSys, Menu, headerObjectName.ToCStr(), "Gear VR Controller" );
+		SetObjectText( *GuiSys, Menu, headerObjectName.c_str(), "Gear VR Controller" );
 	}
 	else if ( ( inputTrackedRemoteCapabilities->ControllerCapabilities & ovrControllerCaps_ModelOculusGo ) != 0 )
 	{
-		SetObjectText( *GuiSys, Menu, headerObjectName.ToCStr(), "Oculus Go Controller" );
+		SetObjectText( *GuiSys, Menu, headerObjectName.c_str(), "Oculus Go Controller" );
 	}
 	else if ( ( inputTrackedRemoteCapabilities->ControllerCapabilities & ovrControllerCaps_ModelOculusTouch ) != 0 )
 	{
-		SetObjectText( *GuiSys, Menu, headerObjectName.ToCStr(), "Oculus Touch Controller" );
+		SetObjectText( *GuiSys, Menu, headerObjectName.c_str(), "Oculus Touch Controller" );
 	}
 	else
 #endif
 	{
-		SetObjectText( *GuiSys, Menu, headerObjectName.ToCStr(), "UNKNOWN CONTROLLER TYPE" );
+		SetObjectText( *GuiSys, Menu, headerObjectName.c_str(), "UNKNOWN CONTROLLER TYPE" );
 	}
 
-	String buttonStr = "";
+	std::string buttonStr = "";
 
 	if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_A )
 	{
 		buttonStr += "A ";
-		SetObjectVisible( *GuiSys, Menu, aButtonObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, aButtonObjectName.ToCStr(), "A" );
+		SetObjectVisible( *GuiSys, Menu, aButtonObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, aButtonObjectName.c_str(), "A" );
 	}
 
 	if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_Trigger )
 	{
 		buttonStr += "TRG ";
-		SetObjectVisible( *GuiSys, Menu, triggerObjectName.ToCStr(), true );
-		SetObjectVisible( *GuiSys, Menu, triggerAnalogObjectName.ToCStr(), true );
+		SetObjectVisible( *GuiSys, Menu, triggerObjectName.c_str(), true );
+		SetObjectVisible( *GuiSys, Menu, triggerAnalogObjectName.c_str(), true );
 	}
 
 	if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_B )
 	{
 		buttonStr += "B ";
-		SetObjectVisible( *GuiSys, Menu, bButtonObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, bButtonObjectName.ToCStr(), "B" );
+		SetObjectVisible( *GuiSys, Menu, bButtonObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, bButtonObjectName.c_str(), "B" );
 	}
 
 	if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_X )
 	{
 		buttonStr += "X ";
-		SetObjectVisible( *GuiSys, Menu, aButtonObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, aButtonObjectName.ToCStr(), "X" );
+		SetObjectVisible( *GuiSys, Menu, aButtonObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, aButtonObjectName.c_str(), "X" );
 	}
 
 	if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_Y )
 	{
 		buttonStr += "Y ";
-		SetObjectVisible( *GuiSys, Menu, bButtonObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, bButtonObjectName.ToCStr(), "Y" );
+		SetObjectVisible( *GuiSys, Menu, bButtonObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, bButtonObjectName.c_str(), "Y" );
 	}
 
 #if defined( OVR_OS_ANDROID )
@@ -1760,27 +1851,27 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 	if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_GripTrigger )
 	{
 		buttonStr += "GRIP ";
-		SetObjectVisible( *GuiSys, Menu, gripObjectName.ToCStr(), true );
-		SetObjectVisible( *GuiSys, Menu, gripAnalogObjectName.ToCStr(), true );
+		SetObjectVisible( *GuiSys, Menu, gripObjectName.c_str(), true );
+		SetObjectVisible( *GuiSys, Menu, gripAnalogObjectName.c_str(), true );
 	}
 
 	if ( inputTrackedRemoteCapabilities->TouchCapabilities & ovrTouch_IndexTrigger )
 	{
 		buttonStr += "Pnt ";
-		SetObjectVisible( *GuiSys, Menu, pointingObjectName.ToCStr(), true );
+		SetObjectVisible( *GuiSys, Menu, pointingObjectName.c_str(), true );
 	}
 
 	if ( inputTrackedRemoteCapabilities->TouchCapabilities & ovrTouch_ThumbUp )
 	{
 		buttonStr += "Tmb ";
-		SetObjectVisible( *GuiSys, Menu, thumbUpObjectName.ToCStr(), true );
+		SetObjectVisible( *GuiSys, Menu, thumbUpObjectName.c_str(), true );
 	}
 #endif
 
 	if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_Back )
 	{
 		buttonStr += "BACK ";
-		SetObjectVisible( *GuiSys, Menu, backObjectName.ToCStr(), true );
+		SetObjectVisible( *GuiSys, Menu, backObjectName.c_str(), true );
 	}
 
 	if ( inputTrackedRemoteCapabilities->ControllerCapabilities & ovrControllerCaps_ModelOculusTouch )
@@ -1788,48 +1879,48 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 		if ( inputTrackedRemoteCapabilities->ButtonCapabilities & ovrButton_Enter )
 		{
 			buttonStr += "Enter ";
-			SetObjectVisible( *GuiSys, Menu, backObjectName.ToCStr(), true );
-			SetObjectText( *GuiSys, Menu, backObjectName.ToCStr(), "Enter" );
+			SetObjectVisible( *GuiSys, Menu, backObjectName.c_str(), true );
+			SetObjectText( *GuiSys, Menu, backObjectName.c_str(), "Enter" );
 		}
 	}
 
-	SetObjectVisible( *GuiSys, Menu, buttonCapsObjectName.ToCStr(), true );
-	SetObjectText( *GuiSys, Menu, buttonCapsObjectName.ToCStr(), "Buttons: %s",
-		buttonStr.ToCStr() );
+	SetObjectVisible( *GuiSys, Menu, buttonCapsObjectName.c_str(), true );
+	SetObjectText( *GuiSys, Menu, buttonCapsObjectName.c_str(), "Buttons: %s",
+		buttonStr.c_str() );
 
 #if defined( OVR_OS_ANDROID )
 	if ( remoteInputState.Touches & ovrTouch_IndexTrigger )
 	{
 		buttons += "TA ";
-		SetObjectColor( *GuiSys, Menu, triggerAnalogObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, triggerAnalogObjectName.c_str(),
 			Vector4f( 0.25f, 1.0f, 0.0f, 1.0f ) );
 	}
 
-	SetObjectText( *GuiSys, Menu, triggerAnalogObjectName.ToCStr(),
+	SetObjectText( *GuiSys, Menu, triggerAnalogObjectName.c_str(),
 		"%.2f",
 		remoteInputState.IndexTrigger );
 
 	if ( remoteInputState.Buttons & ovrButton_GripTrigger )
 	{
 		buttons += "GRIP ";
-		SetObjectColor( *GuiSys, Menu, gripObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, gripObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
-	SetObjectText( *GuiSys, Menu, gripAnalogObjectName.ToCStr(),
+	SetObjectText( *GuiSys, Menu, gripAnalogObjectName.c_str(),
 		"%.2f",
 		remoteInputState.GripTrigger );
 
 	if ( remoteInputState.Touches & ovrTouch_IndexPointing )
 	{
 		buttons += "Pnt ";
-		SetObjectColor( *GuiSys, Menu, pointingObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, pointingObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
 
 	if ( remoteInputState.Touches & ovrTouch_ThumbUp )
 	{
 		buttons += "Tmb ";
-		SetObjectColor( *GuiSys, Menu, thumbUpObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, thumbUpObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
 #endif
@@ -1867,91 +1958,91 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 	if ( remoteInputState.Buttons & ovrButton_A )
 	{
 		buttons += "A ";
-		SetObjectColor( *GuiSys, Menu, aButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, aButtonObjectName.c_str(),
 			Vector4f( 1.25f, 0.25f, 0.25f, 1.0f ) );
 	}
 
 	if ( remoteInputState.Buttons & ovrButton_Trigger )
 	{
 		buttons += "Trigger ";
-		SetObjectColor( *GuiSys, Menu, triggerObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, triggerObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
 
 	if ( remoteInputState.Touches & ovrTouch_A && remoteInputState.Buttons & ovrButton_A )
 	{
 		buttons += "A ";
-		SetObjectColor( *GuiSys, Menu, aButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, aButtonObjectName.c_str(),
 			Vector4f( 0.25f, 0.25f, 1.0f, 1.0f ) );
 	}
 	else if ( remoteInputState.Touches & ovrTouch_A )
 	{
 		buttons += "A ";
-		SetObjectColor( *GuiSys, Menu, aButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, aButtonObjectName.c_str(),
 			Vector4f( 0.25f, 1.0f, 0.25f, 1.0f ) );
 	}
 
 	if ( remoteInputState.Touches & ovrTouch_B && remoteInputState.Buttons & ovrButton_B )
 	{
 		buttons += "B ";
-		SetObjectColor( *GuiSys, Menu, bButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, bButtonObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
 	else if ( remoteInputState.Touches & ovrTouch_B )
 	{
 		buttons += "B ";
-		SetObjectColor( *GuiSys, Menu, bButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, bButtonObjectName.c_str(),
 			Vector4f( 0.25f, 1.0f, 0.25f, 1.0f ) );
 	}
 	else if ( remoteInputState.Buttons & ovrButton_B )
 	{
 		buttons += "B ";
-		SetObjectColor( *GuiSys, Menu, bButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, bButtonObjectName.c_str(),
 			Vector4f( 0.25f, 0.25f, 1.0f, 1.0f ) );
 	}
 
 	if ( remoteInputState.Touches & ovrTouch_X && remoteInputState.Buttons & ovrButton_X )
 	{
 		buttons += "X ";
-		SetObjectColor( *GuiSys, Menu, aButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, aButtonObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
 	else if ( remoteInputState.Touches & ovrTouch_X )
 	{
 		buttons += "X ";
-		SetObjectColor( *GuiSys, Menu, aButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, aButtonObjectName.c_str(),
 			Vector4f( 0.25f, 1.0f, 0.25f, 1.0f ) );
 	}
 	else if ( remoteInputState.Buttons & ovrButton_X )
 	{
 		buttons += "X ";
-		SetObjectColor( *GuiSys, Menu, aButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, aButtonObjectName.c_str(),
 			Vector4f( 0.25f, 0.25f, 1.0f, 1.0f ) );
 	}
 
 	if ( remoteInputState.Touches & ovrTouch_Y && remoteInputState.Buttons & ovrButton_Y )
 	{
 		buttons += "Y ";
-		SetObjectColor( *GuiSys, Menu, bButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, bButtonObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
 	else if ( remoteInputState.Touches & ovrTouch_Y )
 	{
 		buttons += "y ";
-		SetObjectColor( *GuiSys, Menu, bButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, bButtonObjectName.c_str(),
 			Vector4f( 0.25f, 1.0f, 0.25f, 1.0f ) );
 	}
 	else if ( remoteInputState.Buttons & ovrButton_Y )
 	{
 		buttons += "Y ";
-		SetObjectColor( *GuiSys, Menu, bButtonObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, bButtonObjectName.c_str(),
 			Vector4f( 0.25f, 0.25f, 1.0f, 1.0f ) );
 	}
 
 	if ( remoteInputState.Buttons & ovrButton_Back )
 	{
 		buttons += "BACK ";
-		SetObjectColor( *GuiSys, Menu, backObjectName.ToCStr(),
+		SetObjectColor( *GuiSys, Menu, backObjectName.c_str(),
 			Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 	}
 
@@ -1960,7 +2051,7 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 		if ( remoteInputState.Buttons & ovrButton_Enter )
 		{
 			buttons += "ENTER";
-			SetObjectColor( *GuiSys, Menu, backObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, backObjectName.c_str(),
 				Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 		}
 	}
@@ -1968,34 +2059,34 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 	
 	if ( inputTrackedRemoteCapabilities->ControllerCapabilities & ovrControllerCaps_HasTrackpad )
 	{
-		SetObjectVisible( *GuiSys, Menu, rangeObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, rangeObjectName.ToCStr(), "Touch Range: ( %i, %i )",
+		SetObjectVisible( *GuiSys, Menu, rangeObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, rangeObjectName.c_str(), "Touch Range: ( %i, %i )",
 			( int )inputTrackedRemoteCapabilities->TrackpadMaxX, ( int )inputTrackedRemoteCapabilities->TrackpadMaxY );
-		SetObjectVisible( *GuiSys, Menu, sizeObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, sizeObjectName.ToCStr(), "Touch Size: ( %.0f, %.0f )",
+		SetObjectVisible( *GuiSys, Menu, sizeObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, sizeObjectName.c_str(), "Touch Size: ( %.0f, %.0f )",
 			inputTrackedRemoteCapabilities->TrackpadSizeX, inputTrackedRemoteCapabilities->TrackpadSizeY );
 
-		SetObjectVisible( *GuiSys, Menu, touchObjectName.ToCStr(), true );
-		SetObjectVisible( *GuiSys, Menu, touchpadClickObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, touchObjectName.ToCStr(), "TP Touch" );
-		SetObjectText( *GuiSys, Menu, touchpadClickObjectName.ToCStr(), "TP Click" );
+		SetObjectVisible( *GuiSys, Menu, touchObjectName.c_str(), true );
+		SetObjectVisible( *GuiSys, Menu, touchpadClickObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, touchObjectName.c_str(), "TP Touch" );
+		SetObjectText( *GuiSys, Menu, touchpadClickObjectName.c_str(), "TP Click" );
 
 		if ( remoteInputState.TrackpadStatus )
 		{
-			SetObjectColor( *GuiSys, Menu, touchObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, touchObjectName.c_str(),
 				Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 		}
 
 		if ( remoteInputState.Touches & ovrTouch_TrackPad )
 		{
 			// this code is a duplicate of the above, using a slightly different color to differentiate.
-			SetObjectColor( *GuiSys, Menu, touchObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, touchObjectName.c_str(),
 				Vector4f( 1.0f, 0.25f, 0.3f, 1.0f ) );
 		}
 
 		if ( remoteInputState.Buttons & ovrButton_Enter )
 		{
-			SetObjectColor( *GuiSys, Menu, touchpadClickObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, touchpadClickObjectName.c_str(),
 				Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 		}
 
@@ -2006,8 +2097,8 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 			Vector2f( trDevice.GetTrackedRemoteCaps().TrackpadSizeX,
 				trDevice.GetTrackedRemoteCaps().TrackpadSizeY ),
 			trDevice.MinTrackpad, trDevice.MaxTrackpad, mm );
-		SetObjectVisible( *GuiSys, Menu, touchPosObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, touchPosObjectName.ToCStr(),
+		SetObjectVisible( *GuiSys, Menu, touchPosObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, touchPosObjectName.c_str(),
 			"TP( %.2f, %.2f ) Min( %.2f, %.2f ) Max( %.2f, %.2f )",
 			remoteInputState.TrackpadPosition.x,
 			remoteInputState.TrackpadPosition.y,
@@ -2015,20 +2106,20 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 	}
 	else if ( inputTrackedRemoteCapabilities->ControllerCapabilities & ovrControllerCaps_HasJoystick )
 	{
-		SetObjectVisible( *GuiSys, Menu, touchObjectName.ToCStr(), true );
-		SetObjectVisible( *GuiSys, Menu, touchpadClickObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, touchObjectName.ToCStr(), "JS Touch" );
-		SetObjectText( *GuiSys, Menu, touchpadClickObjectName.ToCStr(), "JS Click" );
+		SetObjectVisible( *GuiSys, Menu, touchObjectName.c_str(), true );
+		SetObjectVisible( *GuiSys, Menu, touchpadClickObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, touchObjectName.c_str(), "JS Touch" );
+		SetObjectText( *GuiSys, Menu, touchpadClickObjectName.c_str(), "JS Click" );
 
 		if ( remoteInputState.Touches & ovrTouch_Joystick )
 		{
-			SetObjectColor( *GuiSys, Menu, touchObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, touchObjectName.c_str(),
 				Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 		}
 
 		if ( remoteInputState.Buttons & ovrButton_Joystick )
 		{
-			SetObjectColor( *GuiSys, Menu, touchpadClickObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, touchpadClickObjectName.c_str(),
 				Vector4f( 1.0f, 0.25f, 0.25f, 1.0f ) );
 		}
 
@@ -2039,8 +2130,8 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 			Vector2f( 2.0f,
 				2.0f ),
 			 trDevice.MinTrackpad, trDevice.MaxTrackpad, mm );
-		SetObjectVisible( *GuiSys, Menu, touchPosObjectName.ToCStr(), true );
-		SetObjectText( *GuiSys, Menu, touchPosObjectName.ToCStr(),
+		SetObjectVisible( *GuiSys, Menu, touchPosObjectName.c_str(), true );
+		SetObjectText( *GuiSys, Menu, touchPosObjectName.c_str(),
 			"JS( %.2f, %.2f ) Min( %.2f, %.2f ) Max( %.2f, %.2f )",
 			remoteInputState.Joystick.x,
 			remoteInputState.Joystick.y,
@@ -2048,23 +2139,23 @@ ovrResult ovrVrController::PopulateRemoteControllerInfo( ovrInputDevice_TrackedR
 		if ( remoteInputState.Joystick.x != remoteInputState.JoystickNoDeadZone.x
 			|| remoteInputState.Joystick.y != remoteInputState.JoystickNoDeadZone.y )
 		{
-			SetObjectColor( *GuiSys, Menu, touchPosObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, touchPosObjectName.c_str(),
 				Vector4f( 0.35f, 0.25f, 0.25f, 1.0f ) );
 		}
 		else
 		{
-			SetObjectColor( *GuiSys, Menu, touchPosObjectName.ToCStr(),
+			SetObjectColor( *GuiSys, Menu, touchPosObjectName.c_str(),
 				Vector4f( 0.25f, 0.25f, 0.25f, 1.0f ) );
 		}
 	}
 
 	char const *handStr =
 		controllerHand == ovrArmModel::HAND_LEFT ? "Left" : "Right";
-	SetObjectVisible( *GuiSys, Menu, handObjectName.ToCStr(), true );
-	SetObjectText( *GuiSys, Menu, handObjectName.ToCStr(), "Hand: %s", handStr );
+	SetObjectVisible( *GuiSys, Menu, handObjectName.c_str(), true );
+	SetObjectText( *GuiSys, Menu, handObjectName.c_str(), "Hand: %s", handStr );
 
-	SetObjectVisible( *GuiSys, Menu, batteryObjectName.ToCStr(), true );
-	SetObjectText( *GuiSys, Menu, batteryObjectName.ToCStr(), "Battery: %d",
+	SetObjectVisible( *GuiSys, Menu, batteryObjectName.c_str(), true );
+	SetObjectText( *GuiSys, Menu, batteryObjectName.c_str(), "Battery: %d",
 		remoteInputState.BatteryPercentRemaining );
 
 	if ( remoteInputState.RecenterCount != trDevice.GetLastRecenterCount() )
@@ -2177,16 +2268,25 @@ void ovrVrController::OnDeviceConnected( const ovrInputCapabilityHeader & capsHe
 					// populate model surfaces.
 					ovrInputDevice_TrackedRemote & trDevice = *static_cast< ovrInputDevice_TrackedRemote*>( device );
 					std::vector< ovrDrawSurface > & 	controllerSurfaces = trDevice.GetControllerSurfaces();
-					OVR::ModelFile * modelFile;
+					OVR::ModelFile * modelFile = ControllerModelGear;
+#if defined( OVR_OS_ANDROID )
+					if ( trDevice.GetTrackedRemoteCaps().ControllerCapabilities & ovrControllerCaps_ModelOculusGo )
+					{
+						modelFile = ControllerModelOculusGo;
+					}
+					else if ( trDevice.GetTrackedRemoteCaps().ControllerCapabilities & ovrControllerCaps_ModelOculusTouch )
+					{
 						
-					if ( trDevice.GetHand() == ovrArmModel::HAND_LEFT )
-					{
-						modelFile = ControllerModelOculusTouchLeft;
+						if ( trDevice.GetHand() == ovrArmModel::HAND_LEFT )
+						{
+							modelFile = ControllerModelOculusTouchLeft;
+						}
+						else
+						{
+							modelFile = ControllerModelOculusTouchRight;
+						}
 					}
-					else
-					{
-						modelFile = ControllerModelOculusTouchRight;
-					}
+#endif
 
 					controllerSurfaces.clear();
 					for ( auto& model : modelFile->Models )
@@ -2327,7 +2427,7 @@ ovrInputDeviceBase * ovrInputDevice_TrackedRemote::Create( App & app, OvrGuiSys 
 				remoteCapabilities.TrackpadSizeX, remoteCapabilities.TrackpadSizeY );
 
 		device->ArmModel.InitSkeleton();
-		device->JointHandles.Resize( device->ArmModel.GetSkeleton().GetJoints().GetSizeI() );
+		device->JointHandles.resize( device->ArmModel.GetSkeleton().GetJoints().size() );
 
 		device->HapticState = 0;
 		device->HapticsSimpleValue = 0.0f;

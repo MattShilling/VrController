@@ -15,7 +15,7 @@ TODO: this is completely untested and will likely need some more work before use
 
 #include <stdlib.h>
 
-#include "Kernel/OVR_LogUtils.h"
+#include "OVR_LogUtils.h"
 #include "OVR_GlUtils.h"
 #include "TextureAtlas.h"
 #include "VrCommon.h"
@@ -76,14 +76,14 @@ void ovrBeamRenderer::Init( const int maxBeams, const bool depthTest )
 	const int numVerts = maxBeams * 4;
 
 	VertexAttribs attr;
-	attr.position.Resize( numVerts );
-	attr.uv0.Resize( numVerts );
-	attr.color.Resize( numVerts );
+	attr.position.resize( numVerts );
+	attr.uv0.resize( numVerts );
+	attr.color.resize( numVerts );
 
 	// the indices will never change once we've set them up; we just won't necessarily
 	// use all of the index buffer to render.
-	Array< TriangleIndex > indices;
-	indices.Resize( MaxBeams * 6 );
+	std::vector< TriangleIndex > indices;
+	indices.resize( MaxBeams * 6 );
 
 	for ( int i = 0; i < MaxBeams; i ++ )
 	{
@@ -123,9 +123,9 @@ void ovrBeamRenderer::Shutdown()
 	DeleteProgram( LineProgram );
 
 	MaxBeams = 0;
-	FreeBeams.Resize( 0 );
-	ActiveBeams.Resize( 0 );
-	BeamInfos.Resize( 0 );
+	FreeBeams.resize( 0 );
+	ActiveBeams.resize( 0 );
+	BeamInfos.resize( 0 );
 }
 
 //==============================
@@ -140,26 +140,26 @@ ovrBeamRenderer::handle_t ovrBeamRenderer::AddBeam( const ovrFrameInput & frame,
 	handle_t handle;
 
 	//OVR_LOG( "ovrBeamRenderer::AddDebugLine" );
-	if ( FreeBeams.GetSizeI() > 0 )
+	if ( FreeBeams.size() > 0 )
 	{
-		handle = FreeBeams[FreeBeams.GetSizeI() - 1];
-		FreeBeams.PopBack();
+		handle = FreeBeams[static_cast< int >( FreeBeams.size() ) - 1];
+		FreeBeams.pop_back();
 	}
 	else
 	{
-		handle = handle_t( static_cast< uint16_t >( BeamInfos.GetSizeI() ) );
+		handle = handle_t( static_cast< uint16_t >( BeamInfos.size() ) );
 		if ( handle.Get() >= MaxBeams || handle.Get() >= MAX_BEAMS )
 		{
 			return handle_t();
 		}
-		BeamInfos.PushBack( ovrBeamInfo() );
+		BeamInfos.push_back( ovrBeamInfo() );
 	}
 
 	OVR_ASSERT( handle.IsValid() );
-	OVR_ASSERT( handle.Get() < BeamInfos.GetSizeI() );
+	OVR_ASSERT( handle.Get() < static_cast< int >( BeamInfos.size() ) );
 	OVR_ASSERT( handle.Get() < MAX_BEAMS );
 
-	ActiveBeams.PushBack( handle );
+	ActiveBeams.push_back( handle );
 
 	UpdateBeamInternal( frame, handle, atlas, atlasIndex, width, startPos, endPos, initialColor, lifeTime );
 
@@ -178,7 +178,7 @@ void ovrBeamRenderer::UpdateBeam( const ovrFrameInput & frame, const handle_t ha
 
 void ovrBeamRenderer::RemoveBeam( const handle_t handle )
 {
-	if ( !handle.IsValid() || handle.Get() >= BeamInfos.GetSize() )
+	if ( !handle.IsValid() || handle.Get() >= BeamInfos.size() )
 	{
 		return;
 	}
@@ -227,14 +227,14 @@ void ovrBeamRenderer::Frame( const ovrFrameInput & frame, const Matrix4f & cente
 	Surf.graphicsCommand.uniformTextures[0] = atlas.GetTexture();
 
 	VertexAttribs attr;
-	attr.position.Resize( ActiveBeams.GetSize() * 4 );
-	attr.color.Resize( ActiveBeams.GetSizeI() * 4 );
-	attr.uv0.Resize( ActiveBeams.GetSizeI() * 4 );
+	attr.position.resize( ActiveBeams.size() * 4 );
+	attr.color.resize( ActiveBeams.size() * 4 );
+	attr.uv0.resize( ActiveBeams.size() * 4 );
 
 	const Vector3f viewPos = GetViewMatrixPosition( centerViewMatrix );
 
 	int quadIndex = 0;
-	for ( int i = 0; i < ActiveBeams.GetSizeI(); ++i )
+	for ( int i = 0; i < static_cast< int >( ActiveBeams.size() ); ++i )
 	{
 		const handle_t beamHandle = ActiveBeams[i];
 		if ( !beamHandle.IsValid() )
@@ -248,8 +248,9 @@ void ovrBeamRenderer::Frame( const ovrFrameInput & frame, const Matrix4f & cente
 		{
 			OVR_LOG( "Free beamIndex %i", (int)beamHandle.Get() );
 			BeamInfos[beamHandle.Get()].Handle = handle_t();
-			FreeBeams.PushBack( beamHandle );
-			ActiveBeams.RemoveAtUnordered( i );
+			FreeBeams.push_back( beamHandle );
+			ActiveBeams[i] = ActiveBeams.back();
+			ActiveBeams.pop_back();
 			i--;
 			continue;
 		}
@@ -290,11 +291,11 @@ void ovrBeamRenderer::Frame( const ovrFrameInput & frame, const Matrix4f & cente
 //==============================
 // ovrBeamRenderer::RenderEyeView
 void ovrBeamRenderer::RenderEyeView( const Matrix4f & /*viewMatrix*/, const Matrix4f & /*projMatrix*/,
-		Array< ovrDrawSurface > & surfaceList )
+		std::vector< ovrDrawSurface > & surfaceList )
 {
 	if ( Surf.geo.indexCount > 0 )
 	{
-		surfaceList.PushBack( ovrDrawSurface( ModelMatrix, &Surf ) );
+		surfaceList.push_back( ovrDrawSurface( ModelMatrix, &Surf ) );
 	}
 }
 
