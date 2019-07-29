@@ -30,7 +30,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -95,7 +95,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -136,7 +136,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panelana";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -175,7 +175,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -216,7 +216,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -257,7 +257,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -298,7 +298,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -339,7 +339,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -380,7 +380,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -421,7 +421,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -462,7 +462,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -503,7 +503,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panelana";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -542,7 +542,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -583,7 +583,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "button_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -624,7 +624,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "primary_input_size_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -665,7 +665,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "primary_input_range_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -706,7 +706,7 @@ itemParms {
             VRMenuSurfaceParms {
                 SurfaceName = "primary_input_battery_panel";
                 ImageNames {
-                    String[0] = "apk:///assets/panel.ktx";
+                    string[0] = "apk:///assets/panel.ktx";
                 }
                 TextureTypes {
                     eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -747,7 +747,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "hand_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -788,7 +788,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -855,7 +855,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "secondary_input_trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -894,7 +894,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panelana";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -933,7 +933,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "secondary_input_touchpad_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -974,7 +974,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "secondary_input_touch_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1015,7 +1015,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1056,7 +1056,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1097,7 +1097,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1138,7 +1138,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "secondary_input_touch_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1179,7 +1179,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1220,7 +1220,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1261,7 +1261,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panelana";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1300,7 +1300,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1341,7 +1341,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "button_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1382,7 +1382,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "secondary_input_size_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1423,7 +1423,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "secondary_input_range_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1464,7 +1464,7 @@ itemParms {
             VRMenuSurfaceParms {
                 SurfaceName = "secondary_input_battery_panel";
                 ImageNames {
-                    String[0] = "apk:///assets/panel.ktx";
+                    string[0] = "apk:///assets/panel.ktx";
                 }
                 TextureTypes {
                     eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1505,7 +1505,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "hand_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1546,7 +1546,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1613,7 +1613,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "tertiary_input_trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1652,7 +1652,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panelana";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1691,7 +1691,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "tertiary_input_touchpad_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1732,7 +1732,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "tertiary_input_touch_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1773,7 +1773,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1814,7 +1814,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "tertiary_input_touch_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1855,7 +1855,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1896,7 +1896,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1937,7 +1937,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "tertiary_input_size_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -1978,7 +1978,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "tertiary_input_range_caps_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -2019,7 +2019,7 @@ itemParms {
             VRMenuSurfaceParms {
                 SurfaceName = "tertiary_input_battery_panel";
                 ImageNames {
-                    String[0] = "apk:///assets/panel.ktx";
+                    string[0] = "apk:///assets/panel.ktx";
                 }
                 TextureTypes {
                     eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -2060,7 +2060,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "hand_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
@@ -2101,7 +2101,7 @@ itemParms {
 			VRMenuSurfaceParms {
 				SurfaceName = "trigger_panel";
 				ImageNames {
-					String[0] = "apk:///assets/panel.ktx";
+					string[0] = "apk:///assets/panel.ktx";
 				}
 				TextureTypes {
 					eSurfaceTextureType[0] =  SURFACE_TEXTURE_DIFFUSE;
