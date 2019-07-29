@@ -641,98 +641,7 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 
 		{
 			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/gearcontroller.ovrscene";
-			programs.ProgSingleTexture = &ProgLitSpecularWithHighlight;
-			programs.ProgBaseColorPBR = &ProgLitSpecularWithHighlight;
-			programs.ProgLightMapped = &ProgLitSpecularWithHighlight;
-			MaterialParms	materials;
-			ControllerModelGear = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
-
-			if ( ControllerModelGear == NULL || ControllerModelGear->Models.GetSizeI() < 1 )
-			{
-				OVR_FAIL( "Couldn't load Gear VR controller model" );
-			}
-
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[0].Data = &ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[0];
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[1].Data = &SpecularLightDirection;
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[2].Data = &SpecularLightColor;
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[3].Data = &AmbientLightColor;
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[4].Data = &ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[1];
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[5].Data = &HighLightMask;
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[6].Data = &HighLightColor;
-
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE;
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
-			ControllerModelGear->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
-		}
-
-		{
-			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/gearcontroller_prelit.ovrscene";
-			programs.ProgSingleTexture = &ProgSingleTexture;
-			programs.ProgBaseColorPBR = &ProgSingleTexture;
-			MaterialParms	materials;
-			ControllerModelGearPreLit = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
-
-			if ( ControllerModelGearPreLit == NULL || ControllerModelGearPreLit->Models.GetSizeI() < 1 )
-			{
-				OVR_FAIL( "Couldn't load prelit Gear VR controller model" );
-			}
-
-			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.depthEnable = ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.depthMaskEnable = false;
-			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE_SEPARATE;
-			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
-			ControllerModelGearPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
-		}
-
-		{
-			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/oculusgo_controller.ovrscene";
-			programs.ProgSingleTexture = &ProgLitSpecularWithHighlight;
-			programs.ProgBaseColorPBR = &ProgLitSpecularWithHighlight;
-			programs.ProgLightMapped = &ProgLitSpecularWithHighlight;
-			MaterialParms	materials;
-			ControllerModelOculusGo = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
-
-			if ( ControllerModelOculusGo == NULL || ControllerModelOculusGo->Models.GetSizeI() < 1 )
-			{
-				OVR_FAIL( "Couldn't load oculus go controller model" );
-			}
-
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[0].Data = &ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[0];
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[1].Data = &SpecularLightDirection;
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[2].Data = &SpecularLightColor;
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[3].Data = &AmbientLightColor;
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[4].Data = &ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.uniformTextures[1];
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[5].Data = &HighLightMask;
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.UniformData[6].Data = &HighLightColor;
-
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE;
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
-			ControllerModelOculusGo->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
-		}
-
-		{
-			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/oculusgo_controller_prelit.ovrscene";
-			programs.ProgSingleTexture = &ProgSingleTexture;
-			programs.ProgBaseColorPBR = &ProgSingleTexture;
-			MaterialParms	materials;
-			ControllerModelOculusGoPreLit = LoadModelFile( app->GetFileSys(), controllerModelFile, programs, materials );
-
-			if ( ControllerModelOculusGoPreLit == NULL || ControllerModelOculusGoPreLit->Models.GetSizeI() < 1 )
-			{
-				OVR_FAIL( "Couldn't load prelit oculus go controller model" );
-			}
-
-			ControllerModelOculusGoPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendEnable = ovrGpuState::BLEND_ENABLE;
-			ControllerModelOculusGoPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendSrc = GL_SRC_ALPHA;
-			ControllerModelOculusGoPreLit->Models[0].surfaces[0].surfaceDef.graphicsCommand.GpuState.blendDst = GL_ONE_MINUS_SRC_ALPHA;
-		}
-
-		{
-			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/oculusQuest_oculusTouch_Left.gltf.ovrscene";
+			const char * controllerModelFile = "apk:///assets/box.glb";
 			programs.ProgSingleTexture = &ProgOculusTouch;
 			programs.ProgBaseColorPBR = &ProgOculusTouch;
 			programs.ProgSkinnedBaseColorPBR = &ProgOculusTouch;
@@ -758,7 +667,7 @@ void ovrVrController::EnteredVrMode( const ovrIntentType intentType, const char 
 		}
 		{
 			ModelGlPrograms	programs;
-			const char * controllerModelFile = "apk:///assets/oculusQuest_oculusTouch_Right.gltf.ovrscene";
+			const char * controllerModelFile = "apk:///assets/box.glb";
 			programs.ProgSingleTexture = &ProgOculusTouch;
 			programs.ProgBaseColorPBR = &ProgOculusTouch;
 			programs.ProgSkinnedBaseColorPBR = &ProgOculusTouch;
@@ -2268,25 +2177,16 @@ void ovrVrController::OnDeviceConnected( const ovrInputCapabilityHeader & capsHe
 					// populate model surfaces.
 					ovrInputDevice_TrackedRemote & trDevice = *static_cast< ovrInputDevice_TrackedRemote*>( device );
 					std::vector< ovrDrawSurface > & 	controllerSurfaces = trDevice.GetControllerSurfaces();
-					OVR::ModelFile * modelFile = ControllerModelGear;
-#if defined( OVR_OS_ANDROID )
-					if ( trDevice.GetTrackedRemoteCaps().ControllerCapabilities & ovrControllerCaps_ModelOculusGo )
-					{
-						modelFile = ControllerModelOculusGo;
-					}
-					else if ( trDevice.GetTrackedRemoteCaps().ControllerCapabilities & ovrControllerCaps_ModelOculusTouch )
-					{
+					OVR::ModelFile * modelFile;
 						
-						if ( trDevice.GetHand() == ovrArmModel::HAND_LEFT )
-						{
-							modelFile = ControllerModelOculusTouchLeft;
-						}
-						else
-						{
-							modelFile = ControllerModelOculusTouchRight;
-						}
+					if ( trDevice.GetHand() == ovrArmModel::HAND_LEFT )
+					{
+						modelFile = ControllerModelOculusTouchLeft;
 					}
-#endif
+					else
+					{
+						modelFile = ControllerModelOculusTouchRight;
+					}
 
 					controllerSurfaces.clear();
 					for ( auto& model : modelFile->Models )
